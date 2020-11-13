@@ -88,11 +88,15 @@ output {
 
 ### Elasticsearch配置
 
-es中主要就是使用自带的X-pack插件进行安全性的配置，这样从Kibana中登录连接到es就需要输入密码；
+es中主要就是使用自带的X-pack插件进行安全性的配置，这样从Kibana中登录连接到es就需要输入密码；具体的设置在elasticsearch文件夹下；
 
 ### Kibana配置
 
 在这个简单的例子中，只要设置一下index pattern即可。index pattern的原理是这样的，对于es的index，很多人习惯用项目名称+日期的方式建立index名称，比如`myproject-2020-11-11/id_01`，在Kibana中设置index pattern就可以将一类index都收集起来，比如我们设置index pattern为`myproject*`,这样每天es产生的index都可以被展示到Kibana中。
+
+登录到Kibana界面进行设置是最简单的方法，如下图所示：
+
+![image-20201113161547707](imgs/image-20201113161547707.png)
 
 ## 测试
 
@@ -106,7 +110,7 @@ docker-compose up
 
 使用`filebeat`命令开启filebeat服务；
 
-使用nc命令向8888端口发送UDP数据报：
+使用nc命令向8888端口发送UDP数据报，使用其他的方式发送UDP也是如此；
 
 ```
 nc -u localhost 8888
@@ -119,3 +123,5 @@ nc -u localhost 8888
 ```
 
 几乎同时可以在Logstash的终端输出中看到对应的json输出，因为我们之前配置过输出到终端中，然后再打开Kibana的Discover界面，就可以看到数据以及展示在时间序列图中；可供添加的字段在左侧，可以根据需要进行添加；
+
+![image-20201113160935160](imgs/image-20201113160935160.png)
